@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dipesh Bhakat — AI Engineering Leader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0f1e;
+      --surface: #111827;
+      --surface2: #1a2236;
+      --accent: #3b82f6;
+      --accent2: #8b5cf6;
+      --accent3: #06b6d4;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --border: #1e2d45;
+      --card-bg: #131c2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    nav .logo { font-weight: 700; font-size: 1.1rem; color: var(--accent); letter-spacing: -0.5px; }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { color: var(--muted); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul a:hover { color: var(--text); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(59,130,246,0.12) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.08) 0%, transparent 70%);
+    }
+
+    /* Animated grid lines */
+    .grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    .avatar-ring {
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid transparent;
+      background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                  linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3)) border-box;
+      box-shadow: 0 0 40px rgba(59,130,246,0.35), 0 0 80px rgba(139,92,246,0.15);
+      animation: pulse-ring 3s infinite;
+    }
+    .avatar-online {
+      position: absolute; bottom: 8px; right: 8px;
+      width: 18px; height: 18px;
+      background: #22c55e;
+      border-radius: 50%;
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 10px rgba(34,197,94,0.6);
+      animation: blink 2s infinite;
+    }
+    @keyframes pulse-ring {
+      0%, 100% { box-shadow: 0 0 30px rgba(59,130,246,0.35), 0 0 60px rgba(139,92,246,0.1); }
+      50% { box-shadow: 0 0 60px rgba(59,130,246,0.6), 0 0 120px rgba(139,92,246,0.25); }
+    }
+
+    /* floating orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.18;
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .orb-1 { width: 400px; height: 400px; background: var(--accent); top: -100px; left: -100px; animation-delay: 0s; }
+    .orb-2 { width: 300px; height: 300px; background: var(--accent2); bottom: -50px; right: -50px; animation-delay: 3s; }
+    .orb-3 { width: 200px; height: 200px; background: var(--accent3); top: 40%; left: 70%; animation-delay: 5s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    /* contact cards */
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+    .contact-card {
+      display: flex; align-items: center; gap: 1.25rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
+    .contact-card.email:hover { border-color: var(--accent); box-shadow: 0 12px 40px rgba(59,130,246,0.2); }
+    .contact-card.whatsapp:hover { border-color: #25d366; box-shadow: 0 12px 40px rgba(37,211,102,0.2); }
+    .contact-card.linkedin-c:hover { border-color: #0a66c2; box-shadow: 0 12px 40px rgba(10,102,194,0.2); }
+    .contact-card.topmate-c:hover { border-color: var(--accent2); box-shadow: 0 12px 40px rgba(139,92,246,0.2); }
+    .contact-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; flex-shrink: 0;
+    }
+    .contact-icon.email-i { background: rgba(59,130,246,0.15); }
+    .contact-icon.wa-i { background: rgba(37,211,102,0.15); }
+    .contact-icon.li-i { background: rgba(10,102,194,0.15); }
+    .contact-icon.tm-i { background: rgba(139,92,246,0.15); }
+    .contact-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.2rem; }
+    .contact-value { font-size: 0.95rem; font-weight: 600; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.3);
+      color: var(--accent);
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .badge::before { content: '●'; font-size: 0.5rem; animation: blink 1.5s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    h1 span {
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: 1.2rem; color: var(--muted); margin-bottom: 0.5rem; font-weight: 400;
+    }
+    .location {
+      font-size: 0.9rem; color: var(--muted); margin-bottom: 2.5rem;
+    }
+    .location span { color: var(--accent3); }
+
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      box-shadow: 0 4px 20px rgba(59,130,246,0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.5); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+    .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── Sections ── */
+    section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 0.75rem;
+    }
+    .section-sub { color: var(--muted); margin-bottom: 3rem; max-width: 600px; }
+
+    /* ── Experience ── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+
+    .timeline-item {
+      position: relative; margin-bottom: 2.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .timeline-item:hover { border-color: var(--accent); transform: translateX(4px); }
+    .timeline-item::before {
+      content: '';
+      position: absolute; left: -2.45rem; top: 1.75rem;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .job-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .job-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+    .job-period { font-size: 0.8rem; color: var(--accent3); background: rgba(6,182,212,0.1); padding: 0.2rem 0.75rem; border-radius: 999px; white-space: nowrap; }
+    .job-company { color: var(--accent); font-weight: 600; font-size: 0.95rem; }
+    .job-location { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.75rem; }
+    .job-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ── Skills ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .skill-card:hover { border-color: var(--accent2); }
+    .skill-card h4 { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .pill {
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.2);
+      color: var(--accent);
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .pill.purple { background: rgba(139,92,246,0.1); border-color: rgba(139,92,246,0.2); color: var(--accent2); }
+    .pill.cyan { background: rgba(6,182,212,0.1); border-color: rgba(6,182,212,0.2); color: var(--accent3); }
+
+    /* ── Education ── */
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+    .edu-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .edu-card::after {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 80px; height: 80px;
+      background: radial-gradient(circle at top right, rgba(59,130,246,0.12), transparent 70%);
+    }
+    .edu-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .edu-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .edu-degree { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .edu-school { color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.25rem; }
+    .edu-year { color: var(--muted); font-size: 0.82rem; }
+    .edu-detail { color: var(--accent3); font-size: 0.82rem; margin-top: 0.5rem; font-weight: 600; }
+
+    /* ── Languages ── */
+    .lang-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .lang-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.9rem; font-weight: 500;
+    }
+    .lang-flag { font-size: 1.3rem; }
+
+    /* ── Mentoring ── */
+    .mentor-card {
+      background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .mentor-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .mentor-card p { color: var(--muted); margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto; }
+    .mentor-stats { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .mentor-stat { text-align: center; }
+    .mentor-stat-num { font-size: 2rem; font-weight: 800; color: var(--accent2); }
+    .mentor-stat-label { font-size: 0.75rem; color: var(--muted); }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── Divider ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 0 auto;
+    }
+
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .timeline { padding-left: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="logo">DB</div>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#mentoring">Mentoring</a></li>
+      <li><a href="#consulting">Consulting</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-content">
+      <div class="avatar-wrapper">
+        <img src="Profile Pic.jpeg" alt="Dipesh Bhakat" class="avatar-ring" />
+        <div class="avatar-online"></div>
+      </div>
+      <div class="badge">Available for Mentoring</div>
+      <h1><span>Dipesh Bhakat</span></h1>
+      <p class="tagline">AI Engineering Leader · Sonetel</p>
+      <p class="location">📍 <span>Kolkata, India</span> &nbsp;·&nbsp; GenAI · Agentic AI · Scalable AI Platforms &nbsp;·&nbsp; ex-Microsoft, Salesforce, ServiceNow, Oracle</p>
+
+      <div class="hero-ctas">
+        <a href="https://www.linkedin.com/in/dipeshbhakat92/" target="_blank" class="btn btn-primary">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          Connect on LinkedIn
+        </a>
+        <a href="https://topmate.io/dipesh_bhakat" target="_blank" class="btn btn-outline">
+          Book a Mentoring Session
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">8K+</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Connections</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">12+</div>
+          <div class="stat-label">Years Exp.</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Mentees</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Experience -->
+  <section id="experience">
+    <span class="section-tag">Career</span>
+    <h2 class="section-title">Work Experience</h2>
+    <p class="section-sub">A decade-long journey through India's top tech companies, building scalable enterprise systems.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="job-header">
+          <div class="job-title">AI Engineering Leader</div>
+          <div class="job-period">Oct 2025 — Present</div>
+        </div>
+        <div class="job-company">Sonetel</div>
+        <div class="job-location">India · Remote</div>
+        <div class="job-desc">Working directly with C-suite executives — including the CEO and COO — to define the company's AI strategy and implement AI solutions into product, day-to-day operations, driving revenue growth and measurable business impact.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="job-header">
+          <div class="job-title">Software Engineering Lead</div>
+          <div class="job-period">Jun 2022 — Oct 2025</div>
+        </div>
+        <div class="job-company">Microsoft</div>
+        <div class="job-location">India · Hybrid</div>
+        <div class="job-desc">Led the successful delivery of the Lift–New Relic Integration, managing cross-functional execution from solution architecture to production deployment. Built and scaled a shared infrastructure platform achieving 50% reduction in partner onboarding time. Designed and deployed AI-powered agents to automate engineering workflows—resulting in 30% time savings. Onboarded critical observatory partners (New Relic, Elasticsearch, Datadog, Logz.io, Dynatrace) to Azure Marketplace, contributing to 20% YoY growth in Azure consumption. Led and mentored a high-performing team of 8 engineers.<br/><br/><em style="color:var(--muted);font-size:0.82rem;">Skills: Go · C# · LangChain · Microsoft Azure · RAG · Leadership</em></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="job-header">
+          <div class="job-title">Senior Member Of Technical Staff</div>
+          <div class="job-period">Mar 2020 — May 2022</div>
+        </div>
+        <div class="job-company">Salesforce</div>
+        <div class="job-location">Bengaluru, India</div>
+        <div class="job-desc">Contributed to Salesforce's data platform enabling delivery of more relevant and personalized experiences at scale for enterprise customers globally.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="job-header">
+          <div class="job-title">Software Engineer (SDE2)</div>
+          <div class="job-period">Oct 2017 — Mar 2020</div>
+        </div>
+        <div class="job-company">ServiceNow</div>
+        <div class="job-location">Hyderabad, India · On-site</div>
+        <div class="job-desc">Spearheaded development of an enterprise chatbot plugin integrating with Slack and Messenger. Architected a reverse proxy for secure chatbot endpoint exposure. Integrated IBM Watson and ML models to enhance chatbot capabilities. Developed a modular NLU framework using React.js for self-service intent customization. Reduced feature deployment time by 30% and improved system scalability to handle 2x user traffic.<br/><br/><em style="color:var(--muted);font-size:0.82rem;">Skills: Java · JavaScript · J2EE · NGINX · React.js · Machine Learning · IBM Watson · Big Data</em></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="job-header">
+          <div class="job-title">Software Engineer</div>
+          <div class="job-period">Aug 2016 — Oct 2017</div>
+        </div>
+        <div class="job-company">Ivy Comptech</div>
+        <div class="job-location">Hyderabad, India</div>
+        <div class="job-desc">Developed 2+ core compliance microservices for the iBevis Party gaming platform using Java, Spring, and Hibernate. Integrated third-party KYC APIs reducing manual verification by 40% and accelerating onboarding by 25%. Built a React.js KYC monitoring dashboard with ELK stack, cutting regulatory investigation time by 50%.<br/><br/><em style="color:var(--muted);font-size:0.82rem;">Skills: Java · Git · React.js · Elasticsearch · Microservices · PL/SQL</em></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="job-header">
+          <div class="job-title">Software Developer</div>
+          <div class="job-period">Apr 2015 — May 2016</div>
+        </div>
+        <div class="job-company">Oracle</div>
+        <div class="job-location">Hyderabad, India</div>
+        <div class="job-desc">Built Oracle custom CRM web pages for partner contribution tracking. Developed dashboards to display activities, contacts, and opportunity revenues. Automated CRM data rendering by access roles for 1000+ users, boosting feature delivery velocity by 50%.<br/><br/><em style="color:var(--muted);font-size:0.82rem;">Skills: Java/J2EE · PL/SQL · Oracle Fusion CRM · SOAP WebServices</em></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="job-header">
+          <div class="job-title">Programmer Analyst</div>
+          <div class="job-period">Sep 2013 — Mar 2015</div>
+        </div>
+        <div class="job-company">Cognizant Technology Solutions</div>
+        <div class="job-location">Kolkata, India</div>
+        <div class="job-desc">Developed and deployed 15+ SSRS reports using complex SQL queries integrated into Microsoft Dynamics CRM, improving reporting turnaround by 45%. Created SOAP-based web services on IIS, reducing manual data entry by 60%. Acquired deep CRM domain expertise in the insurance sector.<br/><br/><em style="color:var(--muted);font-size:0.82rem;">Skills: C# · Microsoft Dynamics CRM · Java/J2EE · SSRS · MS SQL Server · SOAP WebServices</em></div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Skills -->
+  <section id="skills">
+    <span class="section-tag">Expertise</span>
+    <h2 class="section-title">Technical Skills</h2>
+    <p class="section-sub">Languages, tools, and domains honed across multiple industry-leading companies.</p>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>Languages</h4>
+        <div class="skill-pills">
+          <span class="pill">Java</span>
+          <span class="pill">Go</span>
+          <span class="pill">C#</span>
+          <span class="pill">Python</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">PL/SQL</span>
+          <span class="pill">C++</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>AI & ML</h4>
+        <div class="skill-pills">
+          <span class="pill purple">GenAI</span>
+          <span class="pill purple">Agentic AI</span>
+          <span class="pill purple">LangChain</span>
+          <span class="pill purple">RAG</span>
+          <span class="pill purple">IBM Watson</span>
+          <span class="pill purple">NLU</span>
+          <span class="pill purple">Machine Learning</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Platforms & Cloud</h4>
+        <div class="skill-pills">
+          <span class="pill cyan">Microsoft Azure</span>
+          <span class="pill cyan">Salesforce</span>
+          <span class="pill cyan">ServiceNow</span>
+          <span class="pill cyan">Oracle Fusion CRM</span>
+          <span class="pill cyan">NGINX</span>
+          <span class="pill cyan">React.js</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Consulting Areas</h4>
+        <div class="skill-pills">
+          <span class="pill purple">AI Strategy</span>
+          <span class="pill cyan">Carbon Markets</span>
+          <span class="pill" style="background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.2);color:#fbbf24;">Crypto & Web3</span>
+          <span class="pill">Problem Solving</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Soft Skills</h4>
+        <div class="skill-pills">
+          <span class="pill">Technical Leadership</span>
+          <span class="pill">Mentoring</span>
+          <span class="pill">Thought Leadership</span>
+          <span class="pill purple">Entrepreneurship</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Education -->
+  <section id="education">
+    <span class="section-tag">Education</span>
+    <h2 class="section-title">Academic Background</h2>
+    <p class="section-sub">A strong engineering foundation topped with business education from one of the world's best institutions.</p>
+
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-degree">Business & Leadership Program</div>
+        <div class="edu-school">Harvard Business School Online</div>
+        <div class="edu-year">July 2021 — September 2021</div>
+        <div class="edu-detail">Credential in Business Strategy</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-icon">⚡</div>
+        <div class="edu-degree">B.Tech — Electronics & Telecommunications</div>
+        <div class="edu-school">Jadavpur University</div>
+        <div class="edu-year">2009 — 2013</div>
+        <div class="edu-detail">CGPA: 9.0 / 10.0</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Mentoring -->
+  <section id="mentoring">
+    <span class="section-tag">Giving Back</span>
+    <h2 class="section-title">Mentoring & Community</h2>
+    <p class="section-sub">Helping the next generation of engineers navigate careers, interviews, and professional growth.</p>
+
+    <div class="mentor-card">
+      <h3>Let's Grow Together</h3>
+      <p>With 12+ years of experience across Sonetel, Microsoft, Salesforce, ServiceNow, and Oracle, Dipesh actively mentors engineers on interview prep, career transitions, and breaking into top-tier tech companies.</p>
+
+      <div class="mentor-stats">
+        <div class="mentor-stat">
+          <div class="mentor-stat-num">10+</div>
+          <div class="mentor-stat-label">Completed Sessions</div>
+        </div>
+        <div class="mentor-stat">
+          <div class="mentor-stat-num">8K+</div>
+          <div class="mentor-stat-label">LinkedIn Followers</div>
+        </div>
+        <div class="mentor-stat">
+          <div class="mentor-stat-num">3</div>
+          <div class="mentor-stat-label">Languages Spoken</div>
+        </div>
+      </div>
+
+      <a href="https://topmate.io/dipesh_bhakat" target="_blank" class="btn btn-primary">Book a Session</a>
+    </div>
+
+    <br /><br />
+
+    <!-- Languages -->
+    <h3 style="font-size:1.1rem; font-weight:600; margin-bottom:1rem; color:var(--muted);">Languages Spoken</h3>
+    <div class="lang-row">
+      <div class="lang-item"><span class="lang-flag">🇬🇧</span> English</div>
+      <div class="lang-item"><span class="lang-flag">🇮🇳</span> Hindi</div>
+      <div class="lang-item"><span class="lang-flag">🇮🇳</span> Bengali</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Consulting -->
+  <section id="consulting">
+    <span class="section-tag">Open for Collaboration</span>
+    <h2 class="section-title">Consulting & Advisory</h2>
+    <p class="section-sub">Bringing deep technical expertise and strategic thinking to complex, high-impact problems.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+
+      <div class="skill-card" style="border-color: rgba(139,92,246,0.3); background: linear-gradient(135deg, #131c2e, #1a1535);">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">🤖</div>
+        <h4 style="color: var(--accent2); margin-bottom:0.5rem;">AI Consulting</h4>
+        <p style="color: var(--muted); font-size: 0.875rem; line-height:1.6;">Strategy, implementation, and product design for AI-driven solutions. From ideation to deployment across industries.</p>
+      </div>
+
+      <div class="skill-card" style="border-color: rgba(59,130,246,0.3);">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">💡</div>
+        <h4 style="color: var(--accent); margin-bottom:0.5rem;">Problem Brainstorming</h4>
+        <p style="color: var(--muted); font-size: 0.875rem; line-height:1.6;">Structured thinking sessions to untangle complex technical, product, or business challenges with fresh perspectives.</p>
+      </div>
+
+      <div class="skill-card" style="border-color: rgba(6,182,212,0.3);">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">🌿</div>
+        <h4 style="color: var(--accent3); margin-bottom:0.5rem;">Carbon Market</h4>
+        <p style="color: var(--muted); font-size: 0.875rem; line-height:1.6;">Advisory on carbon credit platforms, voluntary carbon markets, MRV technology, and AI-powered sustainability solutions.</p>
+      </div>
+
+      <div class="skill-card" style="border-color: rgba(251,191,36,0.2); background: linear-gradient(135deg, #131c2e, #1a1a10);">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">₿</div>
+        <h4 style="color: #fbbf24; margin-bottom:0.5rem;">Crypto & Web3</h4>
+        <p style="color: var(--muted); font-size: 0.875rem; line-height:1.6;">Guidance on blockchain architecture, tokenomics, DeFi protocols, smart contract strategy, and crypto market issues.</p>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; background: var(--card-bg); border: 1px solid var(--border); border-radius:16px; padding: 2rem;">
+      <p style="color: var(--muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Interested in working together? Reach out via LinkedIn or visit Bay of AI.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="https://www.linkedin.com/in/dipeshbhakat92/" target="_blank" class="btn btn-primary">
+          Connect on LinkedIn
+        </a>
+        <a href="https://bayof-ai.com/" target="_blank" class="btn btn-outline">
+          Visit Bay of AI
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Contact -->
+  <section id="contact">
+    <span class="section-tag">Get In Touch</span>
+    <h2 class="section-title">Contact Me</h2>
+    <p class="section-sub">Open to AI consulting, collaborations, mentoring, and interesting conversations.</p>
+
+    <div class="contact-grid">
+
+      <a href="mailto:dipeshbhakat92@gmail.com" class="contact-card email">
+        <div class="contact-icon email-i">📧</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">dipeshbhakat92@gmail.com</div>
+        </div>
+      </a>
+
+      <a href="https://wa.me/919732318360" target="_blank" class="contact-card whatsapp">
+        <div class="contact-icon wa-i">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">WhatsApp</div>
+          <div class="contact-value">+91 97323 18360</div>
+        </div>
+      </a>
+
+      <a href="https://www.linkedin.com/in/dipeshbhakat92/" target="_blank" class="contact-card linkedin-c">
+        <div class="contact-icon li-i">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#0a66c2"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">dipeshbhakat92</div>
+        </div>
+      </a>
+
+      <a href="https://topmate.io/dipesh_bhakat" target="_blank" class="contact-card topmate-c">
+        <div class="contact-icon tm-i">🗓️</div>
+        <div>
+          <div class="contact-label">Book a Session</div>
+          <div class="contact-value">topmate.io/dipesh_bhakat</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Dipesh Bhakat &nbsp;·&nbsp; AI Engineering Leader · Sonetel &nbsp;·&nbsp; Kolkata, India</p>
+    <p style="margin-top:0.5rem;">
+      <a href="mailto:dipeshbhakat92@gmail.com">dipeshbhakat92@gmail.com</a>
+      &nbsp;·&nbsp;
+      <a href="https://wa.me/919732318360" target="_blank">WhatsApp</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/dipeshbhakat92/" target="_blank">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="https://topmate.io/dipesh_bhakat" target="_blank">Topmate</a>
+    </p>
+    <p style="margin-top:1rem; font-size:0.75rem; opacity:0.5;">
+      All views expressed are personal and do not reflect those of any employer.
+    </p>
+  </footer>
+
+</body>
+</html>
